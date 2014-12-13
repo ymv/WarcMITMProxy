@@ -8,7 +8,8 @@ you view in the browser is archived in the WARC file.
 Prerequisites
 =============
 
-* [mitmproxy](http://mitmproxy.org/): `pip install mitmproxy`
+* [mitmproxy](http://mitmproxy.org/): Won't work with latest version, call
+  `pip install -r frozen` to install correct version
 
 Usage
 =====
