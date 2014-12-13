@@ -22,16 +22,16 @@ class WarcOutputSingleton(object):
         return cls._instance
 
     def __init__(self, filename=None):
-        if filename is None:
-            filename = "out.warc.gz"
-            print "WarcOutput was not given a filename. Using", filename
-        self.use_gzip = True if args.file.endswith('.gz') else False
-        self.filename = filename
-
         # Make sure init is not called more than once
         try:
             self.__fo
         except AttributeError:
+            if filename is None:
+                filename = "out.warc.gz"
+                print "WarcOutput was not given a filename. Using", filename
+            self.use_gzip = True if args.file.endswith('.gz') else False
+            self.filename = filename
+
             self.__fo = open(self.filename, 'wb')
             record = warcrecords.WarcinfoRecord()
             record.write_to(self.__fo, gzip=self.use_gzip)
