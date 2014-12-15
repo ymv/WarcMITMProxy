@@ -70,7 +70,7 @@ class WarcMaster(controller.Master):
 
     def handle_response(self, msg):
         version = http_version(msg.httpversion)
-        h_status = 'HTTP/'+version+' '+str(msg.code)+' '+http_status.RESPONSES[msg.code]
+        h_status = 'HTTP/'+version+' '+str(msg.code)+' '+http_status.RESPONSES.get(msg.code, 'Code %s' % msg.code)
         block = h_status + '\r\n' + str(msg.headers) + '\r\n' +msg.content
         url = constructUrl(msg.request)
         record = warcrecords.WarcResponseRecord(url=url, block=block)
